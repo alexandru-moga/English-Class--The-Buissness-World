@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business World: Remote Work Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Welcome Screen -->
+    <div id="welcome-screen" class="screen active">
+        <div class="container">
+            <div class="welcome-content">
+                <div class="hero-image">
+                    <img src="https://pplx-res.cloudinary.com/image/upload/v1758098050/pplx_project_search_images/fb0f06bfaf94bac284d0d95bf646fe53b96e6de6.png" alt="Remote work character" class="character-img">
+                </div>
+                <h1>Business World: Remote Work Game</h1>
+                <div class="objectives">
+                    <h3>Learning Objectives:</h3>
+                    <ul>
+                        <li>Learn workplace changes, employee well-being, and remote work in business context.</li>
+                        <li>Understand pros/cons for employers and employees.</li>
+                        <li>Practice vocabulary, linkers, and grammar from the lesson.</li>
+                    </ul>
+                </div>
+                <button class="btn btn--primary btn--lg" onclick="startGame()">Start Learning Adventure!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Progress Tracker -->
+    <div id="progress-tracker" class="progress-tracker hidden">
+        <div class="container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progress-text">Module 1 of 5</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: Mind Map -->
+    <div id="section-1" class="screen hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2>🧠 Mind Map Challenge</h2>
+                <p>Categorize each statement as an advantage or disadvantage for employers or employees.</p>
+            </div>
+            <div class="mind-map-grid">
+                <div class="quadrant" data-category="employers_advantage">
+                    <h4>Employers - Advantages</h4>
+                    <div class="drop-zone" id="emp-adv-zone"></div>
+                </div>
+                <div class="quadrant" data-category="employers_disadvantage">
+                    <h4>Employers - Disadvantages</h4>
+                    <div class="drop-zone" id="emp-disadv-zone"></div>
+                </div>
+                <div class="quadrant" data-category="employees_advantage">
+                    <h4>Employees - Advantages</h4>
+                    <div class="drop-zone" id="empl-adv-zone"></div>
+                </div>
+                <div class="quadrant" data-category="employees_disadvantage">
+                    <h4>Employees - Disadvantages</h4>
+                    <div class="drop-zone" id="empl-disadv-zone"></div>
+                </div>
+            </div>
+            <div class="statements-container">
+                <div id="statements-list"></div>
+            </div>
+            <div class="section-controls">
+                <button class="btn btn--secondary" onclick="checkMindMap()">Check Answers</button>
+                <button class="btn btn--primary" onclick="nextSection()" id="mindmap-next" disabled>Continue</button>
+            </div>
+            <div id="mindmap-feedback" class="feedback hidden"></div>
+        </div>
+    </div>
+
+    <!-- Section 2: Vocabulary Quiz -->
+    <div id="section-2" class="screen hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2>📚 Vocabulary Challenge</h2>
+                <p>Fill in the blanks with the correct words from the word bank.</p>
+            </div>
+            <div class="word-bank">
+                <h4>Word Bank:</h4>
+                <div class="words">
+                    <span class="word-chip">productive</span>
+                    <span class="word-chip">lonely</span>
+                    <span class="word-chip">dramatic</span>
+                    <span class="word-chip">trend</span>
+                    <span class="word-chip">priority</span>
+                    <span class="word-chip">commute</span>
+                    <span class="word-chip">suitable</span>
+                    <span class="word-chip">range</span>
+                </div>
+            </div>
+            <div class="vocab-questions" id="vocab-questions"></div>
+            <div class="section-controls">
+                <button class="btn btn--secondary" onclick="checkVocab()">Check Answers</button>
+                <button class="btn btn--primary" onclick="nextSection()" id="vocab-next" disabled>Continue</button>
+            </div>
+            <div id="vocab-feedback" class="feedback hidden"></div>
+        </div>
+    </div>
+
+    <!-- Section 3: Linkers -->
+    <div id="section-3" class="screen hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2>🔗 Linkers Matching Game</h2>
+                <p>Match each linker word to its correct function.</p>
+            </div>
+            <div class="linkers-grid">
+                <div class="linkers-words">
+                    <h4>Linker Words:</h4>
+                    <div id="linker-words"></div>
+                </div>
+                <div class="linkers-functions">
+                    <h4>Functions:</h4>
+                    <div class="function-box" data-function="add information">
+                        <h5>Add Information</h5>
+                        <div class="function-drop-zone"></div>
+                    </div>
+                    <div class="function-box" data-function="contrast">
+                        <h5>Contrast</h5>
+                        <div class="function-drop-zone"></div>
+                    </div>
+                    <div class="function-box" data-function="give examples">
+                        <h5>Give Examples</h5>
+                        <div class="function-drop-zone"></div>
+                    </div>
+                    <div class="function-box" data-function="result">
+                        <h5>Result</h5>
+                        <div class="function-drop-zone"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-controls">
+                <button class="btn btn--secondary" onclick="checkLinkers()">Check Answers</button>
+                <button class="btn btn--primary" onclick="nextSection()" id="linkers-next" disabled>Continue</button>
+            </div>
+            <div id="linkers-feedback" class="feedback hidden"></div>
+        </div>
+    </div>
+
+    <!-- Section 4: Grammar Quiz -->
+    <div id="section-4" class="screen hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2>📝 Grammar Quiz: Modal Verbs</h2>
+                <p>Choose the correct modal verb for each situation.</p>
+            </div>
+            <div class="grammar-questions" id="grammar-questions"></div>
+            <div class="section-controls">
+                <button class="btn btn--secondary" onclick="checkGrammar()">Check Answers</button>
+                <button class="btn btn--primary" onclick="nextSection()" id="grammar-next" disabled>Continue</button>
+            </div>
+            <div id="grammar-feedback" class="feedback hidden"></div>
+        </div>
+    </div>
+
+    <!-- Section 5: Writing Task -->
+    <div id="section-5" class="screen hidden">
+        <div class="container">
+            <div class="section-header">
+                <h2>✉️ Email Writing Simulator</h2>
+                <p>Write an email to your boss about remote work plans.</p>
+            </div>
+            <div class="writing-prompt">
+                <h4>Scenario:</h4>
+                <p>Your company is planning to implement remote work. Write an email to your boss about how you feel and your ideas for a positive remote work experience.</p>
+            </div>
+            <div class="email-form">
+                <div class="form-group">
+                    <label class="form-label">To: boss@company.com</label>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Subject:</label>
+                    <input type="text" class="form-control" id="email-subject" placeholder="Enter email subject">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message:</label>
+                    <textarea class="form-control" id="email-message" rows="8" placeholder="Write your email here..."></textarea>
+                </div>
+            </div>
+            <div class="writing-tips">
+                <h4>Tips:</h4>
+                <ul>
+                    <li>Mention your feelings about remote work</li>
+                    <li>Suggest ways to make remote work successful</li>
+                    <li>Be polite and constructive</li>
+                </ul>
+            </div>
+            <div class="section-controls">
+                <button class="btn btn--secondary" onclick="showWritingTips()">Show Sample Response</button>
+                <button class="btn btn--primary" onclick="completeGame()">Complete Game</button>
+            </div>
+            <div id="writing-feedback" class="feedback hidden"></div>
+        </div>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="completion-screen" class="screen hidden">
+        <div class="container">
+            <div class="completion-content">
+                <div class="certificate">
+                    <h1>🎉 Congratulations!</h1>
+                    <h2>Certificate of Completion</h2>
+                    <div class="character-celebrate">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1758098050/pplx_project_search_images/6111714117f0ed94002277668ca463f32ef5d69d.png" alt="Celebrating character" class="character-img">
+                    </div>
+                    <p>You have successfully completed the <strong>Business World: Remote Work Game</strong></p>
+                    <div class="final-score">
+                        <h3>Your Performance:</h3>
+                        <div id="final-results"></div>
+                    </div>
+                    <div class="completion-actions">
+                        <button class="btn btn--primary" onclick="reviewMistakes()">Review Mistakes</button>
+                        <button class="btn btn--secondary" onclick="restartGame()">Play Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="review-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>📋 Review Your Answers</h3>
+                <button class="close-modal" onclick="closeReview()">&times;</button>
+            </div>
+            <div class="modal-body" id="review-content"></div>
+            <div class="modal-footer">
+                <button class="btn btn--primary" onclick="closeReview()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
